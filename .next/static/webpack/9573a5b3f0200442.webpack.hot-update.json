@@ -1,0 +1,1 @@
+{"c":["pages/index","webpack"],"r":[],"m":["__barrel_optimize__?names=Avatar,Button,Card,Col,Divider,Empty,Form,Input,Layout,List,Modal,Row,Select,Space,Tag,Typography,message!=!./node_modules/antd/es/index.js","__barrel_optimize__?names=BookOutlined,CalendarOutlined,CommentOutlined,UserOutlined!=!./node_modules/@ant-design/icons/es/index.js"]}
