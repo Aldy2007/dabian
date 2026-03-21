@@ -16,6 +16,7 @@ export default function handler(req, res) {
   try {
     if (fs.existsSync(articlesDir)) {
       const files = fs.readdirSync(articlesDir);
+      files.sort((a, b) => parseInt(b) - parseInt(a));
       files.forEach(file => {
         if (file.endsWith('.md')) {
           const content = fs.readFileSync(path.join(articlesDir, file), 'utf8');

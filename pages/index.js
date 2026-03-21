@@ -94,11 +94,18 @@ export default function Home() {
 
   return (
     <Layout style={{ minHeight: '100vh', background: '#f0f2f5' }}>
-      <Header style={{ background: '#fff', padding: '0 50px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center' }}>
-        <BookOutlined style={{ fontSize: '24px', color: '#1890ff', marginRight: '12px' }} />
-        <Title level={3} style={{ margin: 0 }}>My Article Hub</Title>
+      <Header style={{ background: '#fff', padding: '0 50px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10 }}>
+        <BookOutlined style={{ fontSize: '28px', color: '#1890ff', marginRight: '16px' }} />
+        <Title level={3} style={{ margin: 0, color: '#1890ff', fontWeight: 'bold' }}>大辩</Title>
       </Header>
       
+      <div style={{ background: 'linear-gradient(135deg, #1890ff 0%, #0050b3 100%)', padding: '60px 50px', color: '#fff', textAlign: 'center' }}>
+        <Title level={1} style={{ color: '#fff', marginBottom: '16px', fontSize: '48px', fontWeight: '800' }}>欢迎来到 大辩</Title>
+        <Paragraph style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>
+          探索最新颖的观点，阅读最深刻的分析。在这里，每一次思辨都是一次成长。
+        </Paragraph>
+      </div>
+
       <Content style={{ padding: '40px 50px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
         <div style={{ marginBottom: 30, display: 'flex', alignItems: 'center', background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
           <Text strong style={{ marginRight: 15, fontSize: '16px' }}>Filter by Author:</Text>
@@ -155,8 +162,9 @@ export default function Home() {
         )}
       </Content>
       
-      <Footer style={{ textAlign: 'center', color: '#888' }}>
-        Article Hub ©{new Date().getFullYear()} Created with Next.js & Ant Design
+      <Footer style={{ textAlign: 'center', color: '#888', background: '#e6f7ff', borderTop: '1px solid #bae0ff', padding: '30px 50px' }}>
+        <Title level={4} style={{ color: '#1890ff', marginBottom: '8px' }}>大辩 - 开启你的思辨之旅</Title>
+        <Paragraph style={{ marginBottom: 0 }}>©{new Date().getFullYear()} 大辩 (DaBian) 保留所有权利. 基于 Next.js & Ant Design 构建.</Paragraph>
       </Footer>
 
       <Modal
