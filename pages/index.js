@@ -167,6 +167,28 @@ export default function Home() {
         <Paragraph style={{ marginBottom: 0 }}>©{new Date().getFullYear()} 大辩 (DaBian) 保留所有权利. 基于 Next.js & Ant Design 构建.</Paragraph>
       </Footer>
 
+      <div style={{
+        position: 'fixed',
+        right: '20px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: '40px',
+        padding: '15px 8px',
+        backgroundColor: '#fffbe6',
+        border: '1px solid #ffe58f',
+        color: '#d48806',
+        borderRadius: '8px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        zIndex: 1000,
+        fontSize: '14px',
+        lineHeight: '1.5',
+        textAlign: 'center',
+        wordBreak: 'break-all'
+      }}>
+        <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>提示</div>
+        <div>所有文章都是写着玩的，不要当真。</div>
+      </div>
+
       <Modal
         title={null}
         open={isModalVisible}
