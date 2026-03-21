@@ -7,7 +7,8 @@ export default async function handler(req, res) {
       if (response.status === 404) {
         return res.status(200).json({});
       }
-      const data = await response.json();
+      const json = await response.json();
+      const data = json.data;
       let comments = {};
       if (data && data.value) {
         try {
@@ -33,7 +34,8 @@ export default async function handler(req, res) {
       const response = await fetch(KV_URL);
       let data = null;
       if (response.status !== 404) {
-        data = await response.json();
+        const json = await response.json();
+        data = json.data;
       }
       
       let comments = {};
