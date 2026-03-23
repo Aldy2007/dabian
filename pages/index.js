@@ -126,39 +126,27 @@ export default function Home() {
         {filteredArticles.length === 0 ? (
           <Empty description="No articles found" style={{ marginTop: '50px' }} />
         ) : (
-          <Row gutter={[24, 24]}>
-            {filteredArticles.map(article => (
-              <Col xs={24} sm={12} md={8} lg={6} key={article.id}>
-                <Card 
-                  hoverable
-                  onClick={() => showArticle(article)}
-                  style={{ borderRadius: '12px', overflow: 'hidden', height: '100%', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
-                  bodyStyle={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%' }}
-                >
-                  <Title level={4} style={{ marginBottom: 'auto', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                    {article.title}
-                  </Title>
-                  <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Tag icon={<UserOutlined />} color="blue" style={{ borderRadius: '4px' }}>
-                      {article.authorName}
-                    </Tag>
-                    <Space size={16}>
-                      <span style={{ color: '#8c8c8c', fontSize: '13px' }}>
-                        <MessageOutlined style={{ marginRight: 4 }} />
-                        {commentsData[article.id] ? commentsData[article.id].length : 0}
-                      </span>
-                      {article.date && (
-                        <Text type="secondary" style={{ fontSize: '12px' }}>
-                          <CalendarOutlined style={{ marginRight: '4px' }} />
-                          {article.date}
-                        </Text>
-                      )}
-                    </Space>
-                  </div>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={filteredArticles}
+            renderItem={article => (
+              <List.Item
+                key={article.id}
+                onClick={() => showArticle(article)}
+                style={{ cursor: 'pointer', background: '#fff', marginBottom: '16px', borderRadius: '8px', padding: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}
+                actions={[
+                  <Tag icon={<UserOutlined />} color="blue" key="author">{article.authorName}</Tag>,
+                  <span key="comments" style={{ color: '#8c8c8c' }}><MessageOutlined style={{ marginRight: 4 }} /> {commentsData[article.id] ? commentsData[article.id].length : 0}</span>,
+                  article.date ? <Text type="secondary" key="date"><CalendarOutlined style={{ marginRight: '4px' }} />{article.date}</Text> : null
+                ].filter(Boolean)}
+              >
+                <List.Item.Meta
+                  title={<Title level={4} style={{ margin: 0 }}>{article.title}</Title>}
+                />
+              </List.Item>
+            )}
+          />
         )}
       </Content>
       
@@ -172,7 +160,6 @@ export default function Home() {
         right: '20px',
         top: '50%',
         transform: 'translateY(-50%)',
-        width: '40px',
         padding: '15px 8px',
         backgroundColor: '#fffbe6',
         border: '1px solid #ffe58f',
@@ -182,11 +169,11 @@ export default function Home() {
         zIndex: 1000,
         fontSize: '14px',
         lineHeight: '1.5',
-        textAlign: 'center',
-        wordBreak: 'break-all'
+        writingMode: 'vertical-rl',
+        letterSpacing: '2px'
       }}>
-        <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>提示</div>
-        <div>所有文章都是写着玩的，不要当真。</div>
+        <div style={{ fontWeight: 'bold', marginBottom: '8px', textAlign: 'center' }}>提示</div>
+        <div style={{ textAlign: 'center' }}>所有文章都是写着玩的，不要当真。</div>
       </div>
 
       <Modal
