@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Select, Typography, Row, Col, Layout, Modal, Tag, Space, Avatar, Empty, Divider, List, Form, Input, Button, message } from 'antd';
+import { Card, Select, Typography, Row, Col, Layout, Modal, Tag, Space, Avatar, Empty, Divider, List, Form, Input, Button, message, Skeleton } from 'antd';
 import { BookOutlined, UserOutlined, CalendarOutlined, MessageOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
@@ -22,6 +22,7 @@ const renderContent = (content) => {
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [filterAuthor, setFilterAuthor] = useState('All');
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -35,6 +36,7 @@ export default function Home() {
       .then(res => res.json())
       .then(data => {
         setArticles(data.articles || []);
+        setLoading(false);
       });
 
     // Fetch comments
@@ -123,12 +125,31 @@ export default function Home() {
           </Select>
         </div>
 
-        {filteredArticles.length === 0 ? (
+        {loading ? (
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={Array.from({ length: 3 }).map((_, i) => ({ id: `skeleton-${i}` }))}
+            renderItem={() => (
+              <List.Item style={{ background: '#fff', marginBottom: '16px', borderRadius: '8px', padding: '24px' }}>
+                <Skeleton active avatar={false} paragraph={{ rows: 3 }} />
+              </List.Item>
+            )}
+          />
+        ) : filteredArticles.length === 0 ? (
           <Empty description="No articles found" style={{ marginTop: '50px' }} />
         ) : (
           <List
             itemLayout="vertical"
             size="large"
+            pagination={{
+              onChange: page => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              },
+              defaultPageSize: 10,
+              showSizeChanger: true,
+              pageSizeOptions: ['10', '20', '30', '50'],
+            }}
             dataSource={filteredArticles}
             renderItem={article => (
               <List.Item
